@@ -253,3 +253,71 @@ console.log(status); // sad
 
 이때 statusObj 객체는 Quo를 상속받지 않았다. 하지만 apply 메서드를 활용하여
 get_status라는 메소드의 this가 statusObj를 대상으로 실행되도록 호출하였다
+
+## 인수 배열
+
+함수를 호출할 떄 추가적인 매개변수로 arguments라는 배열을 사용할 수 있다
+
+이 배열은 함수를 호출할 때 전달된 모든 인수를 접근할 수 있게 해준다.
+
+arguments에는 매개변수 개수보다 더 많이 전달된 인수들도 모두 포함한다
+
+넘어오는 인수의 개수에 맞춰서 동작하는 함수를 만들 수 있게 해준다
+
+```
+
+var sum = function() {
+    var i,
+        sum = 0;
+
+    for (i = 0; i < arguments.length; i++) {
+        sum += arguments[i];
+    }
+    return sum;
+};
+
+sum(1, 2, 3, 4, 5, 6, 7, 8, 9, 10); // 55
+
+```
+
+arguments는 실제 배열이 아닌 배열 같은 객체이다(length라는 속성이 있지만 모든 배열이 갖는 메소드들은 없다)
+
+## 반환
+
+함수는 { 로 시작해서 } 로 끝날 때까지 함수가 실행된다
+
+return문은 함수의 끝에 도달하기 전에 반환을 할 수 있다.
+
+return문을 실행하게 되면 함수의 나머지 부분을 실행하지 않고 즉시 반환이 된다
+
+함수는 항상 반환이 되고 반환값이 지정되지 않은 경우 undefined가 반환된다
+
+## 예외
+
+자바스크립트에서 예외를 다루기 위해서 throw문을 사용한다.
+
+```
+
+var add = function(a,b){
+    if(typeof a !=="number" || typeof b !== "number"){
+        throw{
+            name: 'TypeError',
+            message: 'add needs numbers'
+        }
+    }
+    return a + b;
+}
+
+var error_test = function () {
+    try{
+        add("3", 4)
+    }catch(e){
+        console.log(e.name + ' : ' + e.message)
+    }
+}
+
+error_test() // TypeError : add needs numbers
+
+```
+
+예외 객체는 try문의 catch 절에 전달이 된다.
