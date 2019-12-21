@@ -321,3 +321,115 @@ error_test() // TypeError : add needs numbers
 ```
 
 예외 객체는 try문의 catch 절에 전달이 된다.
+
+## 기본 타입에 기능 추가
+
+자바스크립트는 언어의 기본 타입에 기능을 추가하는 것을 허용한다
+
+예를 들면 method라는 메소드를 Function.ㅔ 처구하면 이후 모든 함수에서 이 메소드를 사용할 수 있다
+
+```
+
+Function.prototype.method = function(name, func){
+    this.prototype[name] = func;
+    return this
+}
+
+```
+
+이처럼 method라는 메소드를 Function.prototype에 추가함으로써 앞으로는 prototype이라는 속성 이름을 사용할 필요가 없다
+
+예제 - 정수 추출 메소드 생성
+
+```
+
+Function.prototype.method = function(name, func){
+    this.prototype[name] = func;
+    return this
+}
+
+Number.method('integer', function(){
+    return Math[this < 0 ? 'ceiling' : 'floor'](this);
+});
+
+```
+
+## Scope(유효범위)
+
+프로그래밍 언어에서 유효범위는 변수와 매개변수의 접근성과 생존 기간을 제어한다.
+
+이름들이 충돌하는 문제를 덜어주고 자동으로 메모리를 관리해준다.
+
+```
+
+var foo = function() {
+    var a = 3,
+        b = 5; // a = 3, b = 5
+
+    console.log(a, b);
+    var bar = function() {
+        var b = 7,
+            c = 11; // a = 3, b = 7, c = 11
+        console.log(a, b, c);
+        a += b + c; // a = 21, b = 7, c = 11
+        console.log(a, b, c);
+    };
+    console.log(a, b, c);
+    // a = 3, b = 5
+
+    bar();
+    console.log(a, b, c);
+    // a = 21, b = 5
+};
+
+```
+
+1. 모든 변수는 블록 바깥쪽에서는 접근할 수 없다.
+2. 블록 내에서 정의된 변수는 블록의 실행이 끝나면 해제된다.
+3. 함수 내에서 정의된 매개변수와 변수는 함수 외부에서는 유효하지 않다.
+4. 함수 내부에서 정의된 변수는 함수 어느 곳에서도 접근할 수 있다. 따라서 함수에서 사용하는 모든 변수를 함수 첫 부분에서 선언하는 것이 최선의 방법이다.
+
+## Closure(클로저)
+
+> 클로저는 함수와 함수가 선언된 어휘적 환경의 조합이다. 이 환경은 클로저가 생성된 시점의 유효 범위 내에 있는 모든 지역 변수로 구성된다
+
+```
+
+function makeAdder(x) {
+  var y = 1;
+  return function(z) {
+    y = 100;
+    return x + y + z;
+  };
+}
+
+var add5 = makeAdder(5);
+var add10 = makeAdder(10);
+//클로저에 x와 y의 환경이 저장됨
+
+console.log(add5(2));  // 107 (x:5 + y:100 + z:2)
+console.log(add10(2)); // 112 (x:10 + y:100 + z:2)
+
+
+```
+
+코드 진행 흐름
+
+1. add5, 와 add10 이라는 변수에 x와 y의 값이 저장된다
+2. add5와 add10에는 리턴 값으로 z라는 인자값을 받는 함수가 저장되어있다.
+3. add5(2), add10(2)로 z값을 넣어준뒤, 호출
+4. y값은 100으로 변경되고 x + y + z 의 결과 값이 리턴된다.
+
+## 모듈
+
+함수와 클로저를 사용해서 모듈을 만들 수 있다
+
+모듈은 내부의 상태나 구현 내용은 숨기고 인터페이스만 제공하는 함수나 객체이다
+
+모듈의 일반적인 패턴은 private 변수와 함수를 정의하는 함수이다.
+
+클로저를 활용해 private 변수와 함수에 접근할 수 있는 권한이 있는 함수를 생성하고 이 함수를 반환하거나 접근 가능한 장소에 이를 저장하는 것이다
+
+모듈 패턴을 사용하면 전역변수 사용을 없앨 수 있다.
+
+> 정보 은닉 애플리케이션이나 다른 싱글톤 패턴들을 효과적으로 캡슐화할 수 있게 한다.
