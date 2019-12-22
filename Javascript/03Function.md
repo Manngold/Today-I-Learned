@@ -433,3 +433,86 @@ console.log(add10(2)); // 112 (x:10 + y:100 + z:2)
 모듈 패턴을 사용하면 전역변수 사용을 없앨 수 있다.
 
 > 정보 은닉 애플리케이션이나 다른 싱글톤 패턴들을 효과적으로 캡슐화할 수 있게 한다.
+
+```
+
+var serialMaker = function() {
+    var prefix = "";
+    var seq = 0;
+    return {
+        setPrefix: function(p) {
+            prefix = String(p);
+        },
+        setSeq: function(s) {
+            seq = s;
+        },
+        gensym: function() {
+            var result = prefix + seq;
+            seq += 1;
+            return result;
+        }
+    };
+};
+
+var seqer = serialMaker();
+seqer.setPrefix("Q");
+seqer.setSeq(1000);
+var unique = seqer.gensym(); //'Q1000'
+
+
+```
+
+seqer 내부 변수에 접근 불가, 메소드를 사용해서 접근해야한다.
+
+## Cascade(연속호출)
+
+일부 메소드는 반환값이 없다. 예를 들어 객체의 상태를 변경하거나 설정하는 메소드들은 일반적으로 반환값이 없다 만약 이러한 메소드들이 undefined 대신 this를 반환한다면 연속 호출이 가능하다
+
+## Meomoization
+
+함수는 불필요한 작업을 피하기 위해서 이전에 연산한 결과를 저장하고 있는 객체를 사용할 수 있다.
+
+이러한 최적화 기법을 Memoization이라고 한다.
+
+예를들면 피보나치 수열을 재귀 함수로 계산하는 경우를 생각해보자
+
+피보나치 수열에서 한 항의 값은 앞선 두 항의 값을 더한 값이다.
+
+```
+
+var fibonacci = function(n) {
+    return n < 2 ? n : fibonacci(n - 1) + fibonacci(n - 2);
+};
+
+for (var i = 0; i <= 10; i++) {
+    console.log(fibonacci(i));
+}
+
+
+```
+
+이 코드는 잘 동작하긴 하지만 처리해야 하는 작업량이 매우 많다
+
+453번을 호출하고 그 중 꼭 필요한 호출 횟수는 11번 뿐이다.
+
+나머지는 이미 계산한 값들을 다시 계산하기 위해서 호출하는 횟수이다.
+
+이처럼 반복되는 작업이 많은 함수에 Memoization 기법을 활용하면 작업량을 현저히 줄일 수 있다
+
+```
+
+var fibonacci = (function() {
+    var memo = [0, 1];
+    var fib = function(n) {
+        var result = memo[n];
+        if (typeof result !== "number") {
+            result = fib(n - 1) + fib(n - 2);
+            memo[n] = result;
+        }
+        return result;
+    };
+    return fib;
+})();
+
+
+```
