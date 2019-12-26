@@ -121,3 +121,42 @@ ex) ls -al 에서 -al가 aruguments에 해당된다
 2> 는 standard error의 결과 값을 갖고 온다
 
 따라서 `rm result.txt 2> error.log`를 입력하고 `cat error.log`를 입력하면 정상적으로 에러 결과를 저장한 것을 확인할 수 있다
+
+## IO Redirection2
+
+> 프로그램 : 하드디스크 SSD에 저장된 코드
+>
+> 프로세스 : 프로그램이 실행되어서 살아난 상태 (여러 프로세스를 생성할 수 있다)
+
+### about cat (concatenate)
+
+사용자의 입력값을 받아서 화면에 출력해주는 프로그램이다
+
+1. hello.txt에 hello world라는 텍스트를 입력해서 저장
+
+2. cat 명령어를 활용하여 화면 출력 `cat hello.txt`
+    - hello world
+
+cat 명령으로 출력을 하는데 두 가지 방식이 있다. 앞서 설명한 방식은 command line arguments로 입력을 받는 것이고
+
+다음은 `cat < hello.txt`로 standard input으로 입력을 받는 방식은 똑같이 hello world를 출력하지만 command line arguments인지 standard input 인지 차이가 있는 것이다.
+
+### command line arguments와 standard input의 다른 예시와 응용
+
+> head : 상위 10줄을 출력해주는 프로그램
+
+1. hello.txt에 긴 문장을 넣고 `head hello.txt`를 하면 문장의 일부만 출력
+
+2. hello.txt를 `head -n1 hello.txt` 명령으로 출력시 앞의 일부만 출력
+
+이때 -n1 hello.txt는 command line arguments로 들어간다
+
+3. (다른 예시) `head -n1 < hello.txt`로 명령을 수행해도 같은 결과가 출력된다
+
+하지만 -n1만 command line arguments이고 < hello.txt는 standard input으로 들어간다
+
+4. (응용) `head -n1 < hello.txt > introduction.txt` 를 활용해서 결과값을 저장하는 명령을 수행할 수 있다.
+
+> 출력 값을 저장할 때, > 를 사용하면 항상 덮어쓰게 되는데 추가하는 법은?
+>
+> '>>'를 넣어서 추가 가능
