@@ -31,7 +31,7 @@ User가 File & Directory에 대해서 접근할 수 있도록 혹은 없도록 �
 
 1. type : 파일인지 폴더인지(파일이면 - 폴더면 d)
 
-> 2, 3, 4 를 통틀어 access mode라고 하는데 read write execute를 나타낸다
+> 2, 3, 4 를 통틀어 User, Group, Others의 access mode라고 하는데 r, w,x는 read write execute를 나타낸다
 
 2. owner permission : 오너의 권한
 
