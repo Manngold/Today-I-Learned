@@ -87,3 +87,25 @@ ErrorLog "/private/var/log/apache2/error_log"
 `tail`은 마지막에 존재하는 데이터 `-f`는 데이터가 생성되면 출력을 해준다
 
 그리고 `curl http://localhost/index.txt`를 입력하면 error log가 찍히는것을 확인할 수 있다
+
+## SSH(Secure Shell Protocol)
+
+SSH란 네트워크 프로토콜 중 하나이며 컴퓨터간에 Public Network를 통해서 통신을 하기 위한 프로토콜인데 보안이 되어있다
+
+SSH는 웹서버와 유사한 구조를 갖고 있다
+
+1. SSH Client와 SSH Server가 존재한다
+
+2. Client가 Server에게 명령어를 전달한다(ls, rm, pwd..등)
+
+3. Server는 해당 명령을 수행하고 수행한 결과를 Client에게 다시 전달한다
+
+사용방법은 간단하다 SSH Client와 Server를 설치해주고
+
+`ssh name@ip`를 입력하게 되면 해당 컴퓨터에 원격으로 접속을 할 수 있게 된다.
+
+접속이 완료되면 명령프롬프트 창의 이름이 Server와 Client가 동일한 것을 확인할 수 있고
+
+작업을 진행하게 되면 해당 컴퓨터에 명령이 수행된다
+
+
