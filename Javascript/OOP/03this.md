@@ -75,3 +75,96 @@ if (funcThis === o2) {
 생성자를 통해서 함수를 호출하면 비어있는 객체를 형성하게 되고, 그 안에서 this의 값이 결정이 된다.
 
 이 경우 o2라는 객체가 형성이 되고, this는 o2가 되는 것이다. 따라서 이후 조건문을 통과할 수 있는 것이다
+
+(추가)
+
+```
+var funcThis = null;
+
+function Func(){
+    funcThis = this;
+    if(o2 === this){
+        console.log("this is o2");
+    } else{
+        console.log("this is not o2");
+    }
+}
+
+var o2 = new Func();
+```
+
+이 코드에서 어떤 결과 값이 나올까
+
+바로 this is not o2가 나온다
+
+o2라는 객체는 만들어져 있지만 new Func()가 할당이 되어있지 않기 때문에 this는 o2를 참조할 수 없게 된다 즉, 함수 안에서는 undefined가 된다
+
+## 객체로서 함수
+
+함수는 객체이다 하지만 객체의 생성 방식은 생성자를 통하여 생성을 해야 한다고 알고 있다 하지만 함수의 생성 방식은 다음과 같다
+
+```
+function sum(x,y){
+    return x + y;
+}
+```
+
+이렇기 때문에 함수가 객체라는것이 크게 와닿지 않는다 하지만 원래 함수의 생성 방식은 다음과 같다
+
+```
+var sum = new Function('x', 'y', 'return x+y;');
+```
+
+인자값, 함수의 몸체가 매개변수로 들어가면서 가독성과 생성이 매우 힘들다 배열, 객체 또한 마찬가지이다
+
+```
+var myObj = new Object({developer: "manngold"});
+
+var arr = new Array(1,2,3);
+```
+
+그래서 개발자들이 개발하기 편하도록 다른 함수,객체,배열 생성방식을 제공하는것이다. 이것을 바로 `리터럴`이라고한다
+
+따라서 이런 리터럴 때문에 함수, 객체, 배열을 쉽게 생성할 수 있게 된다
+
+```
+function sum(x,y){
+    return x + y;
+}
+
+var obj = {developer: "manngold"};
+
+var arr = [1,2,3];
+```
+
+## apply와 this
+
+apply는 this를 설정할 수 있는 메소드이다
+
+apply 메소드의 적용에 따른 this의 값 변화를 알아보자
+
+```
+var o = {};
+var p = {};
+
+function func() {
+    switch (this) {
+        case o:
+            console.log("this is o");
+            break;
+        case p:
+            console.log("this is p");
+            break;
+        case window:
+            console.log("this is window");
+            break;
+    }
+}
+
+func();
+func.apply(o);
+func.apply(p);
+```
+
+처음 func()는 window에 소속되어있는 객체이므로 세번째 케이스로 들어가고
+다음 func.apply(o)는 this를 o로 설정하므로 this === o , 다음은 당연히 this === p가 된다
