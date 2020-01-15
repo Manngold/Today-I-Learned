@@ -15,15 +15,32 @@
 -   [x] 자바스크립트의 좋은 문법들
 -   [x] 객체
 -   [x] 함수
--   [ ] 상속
+-   [x] 상속
 -   [ ] 배열
 -   [ ] 정규표현식
 -   [ ] 메소드
 -   [ ] 스타일
 
-### Next
-
 ### You Don't Know JS
+
+### Functional Programming - opentutorials
+
+-   [x] Scope
+-   [x] Usage of Function
+-   [x] Closure
+-   [x] Arguments
+-   [x] Apply
+
+### Object Oriented Programming - opentutorials
+
+-   [x] Object Oriented Programming
+-   [x] Constructor
+-   [x] this
+-   [x] inheritance
+-   [x] Standard built-in object extand
+-   [x] Object
+-   [ ] Data type
+-   [ ] reference
 
 ## Operating System
 
