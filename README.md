@@ -39,8 +39,8 @@
 -   [x] inheritance
 -   [x] Standard built-in object extand
 -   [x] Object
--   [ ] Data type
--   [ ] reference
+-   [x] Data type
+-   [x] reference
 
 ## Operating System
 
