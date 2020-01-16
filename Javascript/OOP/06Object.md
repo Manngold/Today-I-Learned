@@ -31,3 +31,63 @@ arr.toString();
 
 "1,2,3"
 ```
+
+## Object의 확장
+
+배열의 확장과 마찬가지로 Object 또한 확장이 가능하다
+
+Object에 속한 모든 객체가 특정 value가 있는지 확인하는 메소드를 만들어보자
+
+```
+Object.prototype.contain = function(needle) {
+    for (var name in this) {
+        if (this[name] === needle) {
+            return true;
+        }
+    }
+    return false;
+};
+
+var o = {"name": 'manngold', 'age': 25};
+o.contain("manngold");
+```
+
+## Object 확장의 위험
+
+이러한 확장은 모든 객체에 영향을 준다 다음 코드를 실행 시켜보면 이해가 될 것이다
+
+```
+Object.prototype.contain = function(needle) {
+    for (var name in this) {
+        if (this[name] === needle) {
+            return true;
+        }
+    }
+    return false;
+};
+
+var o = { name: "manngold", age: 25 };
+o.contain("manngold");
+
+for (var name in o) {
+    console.log(name);
+}
+```
+
+원래 기대되는 출력 값이 name과 age이지만 Object.prototype에 존재하는 contain이 같이 나온다
+
+이렇게 모든 객체에 영향을 주게된 것이다
+
+따라서 이렇게 확장을 할 경우 신중하게 결정을 해야한다
+
+만약 확장을 했을 경우 고유한 객체의 속성을 갖고오고 싶다면
+
+```
+for(var name in o){
+    if(o.hasOwnProperty(name)){
+        console.log(name);
+    }
+}
+```
+
+hasOwnProperty 메소드를 사용하면 객체가 갖는 고유의 속성을 리턴한다
