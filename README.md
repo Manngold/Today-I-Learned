@@ -16,10 +16,8 @@
 -   [x] 객체
 -   [x] 함수
 -   [x] 상속
--   [ ] 배열
--   [ ] 정규표현식
--   [ ] 메소드
--   [ ] 스타일
+-   [x] 배열
+-   [x] 메소드
 
 ### You Don't Know JS
 
@@ -41,6 +39,18 @@
 -   [x] Object
 -   [x] Data type
 -   [x] reference
+
+### Modern JavaScript ES6 - inflearn
+
+-   [x] Array
+-   [x] Class and object
+-   [x] Function
+-   [x] Map & WeakMap
+-   [x] Set & WeakSet
+-   [x] Object
+-   [x] Scope
+-   [x] Template
+-   [x] Proxy
 
 ## Operating System
 
