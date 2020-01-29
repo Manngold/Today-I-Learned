@@ -60,6 +60,26 @@
 
 ### 자바스크립트로 하는 자료구조와 알고리즘
 
+-   [x] Big O notation
+-   [x] Characteristic of JS
+-   [ ] Number
+-   [ ] String
+-   [ ] Array
+-   [ ] Object
+-   [ ] Memory management
+-   [ ] Recursive
+-   [ ] Set
+-   [ ] Search and Sorting
+-   [ ] Hashtable
+-   [ ] Stack and Queue
+-   [ ] Linked list
+-   [ ] Doubly linked list
+-   [ ] Cashing
+-   [ ] Tree
+-   [ ] Heap
+-   [ ] Graph
+-   [ ] Dynamic Programming
+
 ## Network
 
 ### HTTP 완벽 가이드
