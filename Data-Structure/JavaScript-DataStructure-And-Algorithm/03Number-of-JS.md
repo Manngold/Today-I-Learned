@@ -90,3 +90,29 @@ function isPrime(n) {
 ```
 
 이렇게 코드를 변경할 수 있고 시간복잡도는 O(sqrt(n))을 나타내게 된다.
+
+## 소인수분해
+
+어떤 소수들이 곱해져야 하는지 구하는 방법이다
+
+```
+function primeFactor(n){
+    while(n % 2 == 0){
+        console.log(2);
+        n = n / 2;
+    }
+
+    for(let i = 3; i * i <= n; i = i + 2){
+        while (n % i == 0){
+            console.log(i);
+            n = n / i;
+        }
+    }
+
+    if(n > 2){
+        console.log(n);
+    }
+}
+```
+
+i로 나머지가 없이 나눌 수 있는 모든 수를 출력한다
