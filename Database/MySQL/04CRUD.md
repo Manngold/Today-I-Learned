@@ -42,3 +42,19 @@ ORDER BY를 활용하여 조건에 따른 정렬이 가능하다
 `SELECT * FROM table_name WHERE condition... ORDER BY condition... LIMIT num`
 
 num에 숫자가 들어가서 해당 숫자만큼 데이터가 출력된다
+
+## UPDATE
+
+`UPDATE`문을 활용하여 수정이 가능하다
+
+### SET
+
+`UPDATE table_name SET assignment WHERE condition`으로
+
+수정이 가능한데 SET을 하고 해당 column=변경 내용을 입력하고 바로 입력하면 모든 column이 해당 값으로 변경되기 때문에 WHERE로 조건을 넣어준다
+
+## DELETE
+
+데이터 삭제를 위한 구문으로 UPDATE와 마찬가지로 모든 데이터에 영향을 줄 수 있기 때문에 조건을 통해서 제약을 걸어주는 것이 중요하다
+
+`DELETE FROM table_name WHERE condition`
