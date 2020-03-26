@@ -62,10 +62,10 @@
 
 -   [x] Big O notation
 -   [x] Characteristic of JS
--   [ ] Number
--   [ ] String
--   [ ] Array
--   [ ] Object
+-   [x] Number
+-   [x] String
+-   [x] Array
+-   [x] Object
 -   [ ] Memory management
 -   [ ] Recursive
 -   [ ] Set

@@ -298,3 +298,37 @@ var sum = [0, 1, 2, 3, 4].reduce(function(prev, curr){
 
 console.log(sum) // 11
 ```
+
+### 다차원 배열
+
+JS에는 다차원 배열이 없지만 가변 배열이 있다.
+
+> 가변 배열 : 항목이 배열인 배열
+
+```
+function matrix(row, col) {
+    var arr = new Array(row);
+    for (var i = 0; i < col; i++) {
+        arr[i] = new Array(row);
+    }
+    return arr;
+}
+
+var newArr = matrix(3, 3);
+```
+
+3 \* 3 배열을 생성한다
+
+조건문을 활용한 1 ~ 9까지의 값을 할당
+
+```
+var cnt = 1;
+for (var i = 0; i < newArr.length; i++) {
+    for (var j = 0; j < newArr[0].length; j++) {
+        newArr[i][j] = cnt;
+        cnt += 1;
+    }
+}
+```
+
+[[1,2,3],[4,5,6],[7,8,9]]를 구성하는 배열이 된다
