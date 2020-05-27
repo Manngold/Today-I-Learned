@@ -46,3 +46,31 @@ module: {
 module -> rules에 배열의 형태로 여러 가지 번들링 전략이 담길 수 있다
 
 `test` 속성은 어떤 파일을 번들링 할 것인가에 대한 것을 정할 수 있고 `use`는 파일에 대해서 어떤 loader를 사용 할 것인가에 대한 설정이면 배열의 최상위 loader부터 사용이 된다.
+
+## output
+
+webpack의 설정을 통해서 여러 가지 번들링된 파일을 output으로 만들 수 있다.
+
+여러 파일에 대해서 번들링을 진행 할 때에는 entry 속성을 객체로 변경 시킨 뒤, 번들링 하고 싶은 파일을 넣어준다.
+
+이후 output 속성에서 filename 속성은 `[name]`을 추가해서 entry 객체의 key 값이 들어가도록 설정을 해준 다음 번들링을 진행하면 각각의 파일이 처리되는 것을 확일 할 수 있다.
+
+example
+
+```
+entry: { index: "./index.js", about: "./about.js" },
+    output: {
+        path: path.resolve(__dirname, "public"),
+        filename: "[name]_bundle.js",
+    },
+```
+
+name에는 index, about이 들어가고 \_bundle.js의 형태로 output 파일이 생성된다.
+
+## plugins
+
+loader는 파일 단위로 처리되는 반면 plugin은 번들링된 파일을 처리한다.
+
+번들링된 파일을 난독화, 추출 등 plugin마다 각기 다른 기능을 제공하기 때문에 활용도가 높다
+
+그리고 다른 사용법을 제공하기 때문에 documentation을 잘 읽고 사용해야 한다.
