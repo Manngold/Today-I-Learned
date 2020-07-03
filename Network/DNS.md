@@ -55,3 +55,22 @@ DNS 덕분에 SRI를 통해서 hosts 파일을 관리 할 때의 문제점들이
 DNS 서버는 ISP(Internet Service Provider)에서 설정해논 DNS 서버를 쓰게 된다. 이런 DNS 서버를 Local DNS Server 라고 한다.
 
 하지만 무료로 DNS 서버를 공개하는 곳도 존재하며 각각의 운영체제마다 DNS 서버를 사용자가 설정 할 수 있다.
+
+### 도메인 이름의 구조
+
+네이버 지도에 들어가면 도메인을 다음과 같이 확인 할 수 있다.
+
+> map.naver.com.
+
+도메인의 구조를 분석해보면
+
+1. . : root domain
+2. com : Top-level domain
+3. naver : Second-level domain
+4. map : sub domain
+
+전 세계에는 수 많은 DNS 서버가 존재하고 각각의 도메인 레벨마다 전담하는 서버들이 존재한다.
+
+우리가 도메인을 입력을 하면 root domain 서버에게 top-level domain을 보고 com에 대한 ip 주소를 갖고있는 top-level domain 서버에 대한 ip 값을 알려준다
+
+이후 top-level domain 서버는 second-level domain을 보고 해당되는 서버의 ip 주소를 알려주는 방식으로 sub domain 까지 내려가서 최종적으로 해당 도메인에 대한 ip 주소를 알 수 있게 된다.
