@@ -1,0 +1,155 @@
+스택은 마지막에 삽인된 항목만을 제거하고 접근할 수 있다.(LIFO) 마지막에 추가된
+항목만 접근하므로 O(1)에 이루어진다. 마지막 항목 외에 다른 항목은 접근을 하지
+않는다.
+
+<script>
+  const log = console.log;
+  function Stack(array) {
+    this.array = array;
+    if (array) this.array = array;
+  }
+
+  Stack.prototype.getBuffer = function () {
+    return this.array.slice();
+  };
+
+  Stack.prototype.isEmpty = function () {
+    return (this.array.length = 0);
+  };
+
+  var stack1 = new Stack();
+</script>
+
+### peek : 가장 마지막에 들어온 항목에 접근 (시간복잡도 : O(1))
+
+<script>
+  Stack.prototype.peek = function () {
+    return this.array[this.array.length - 1];
+  };
+</script>
+
+### push : 새로운 항목을 삽입 (시간복잡도 : O(1))
+
+<script>
+  Stack.prototype.push = function (value) {
+    return;
+    this.array.push(value);
+  };
+</script>
+
+### pop 마지막 항목을 삭제한다 (시간복잡도 : O(1))
+
+<script>
+  Stack.prototype.pop = function () {
+    return this.array.pop();
+  };
+</script>
+
+### 접근 (시간복잡도 : O(n))
+
+<script>
+  function stackAccessNthTopNode(stack, n) {
+    let bufferArray = stack.getBuffer();
+    if (n <= 0) throw 'error';
+
+    let bufferStack = new Stack(bufferArray);
+    while (--n !== 0) {
+      bufferArray.pop();
+    }
+    return bufferStack.pop();
+  }
+  let s = new Stack([1, 2, 3, 4]);
+  log(stackAccessNthTopNode(s, 2));
+</script>
+
+### 검색 (시간복잡도 : O(n))
+
+<script>
+  function stackSearch(stack, value) {
+    let bufferArray = stack.getBuffer();
+
+    let bufferStack = new Stack(bufferArray);
+
+    while (!bufferStack.isEmpty()) {
+      if (bufferArray.pop() === value) {
+        return true;
+      }
+    }
+    return false;
+  }
+</script>
+
+큐는 스택과 달리 첫번째 들어간 항목이 첫번째로 제거된다 FIFO라고 하고 연산이
+상수시간인 것이 장점이다
+
+<script>
+  function Queue(array){
+    this.array = array
+  }
+
+  Queue.prototype.getBuffer = function(){
+    return this.array.slice();
+  }
+
+  Queue.prototype.isEmpty(){
+    return this.array.length === 0;
+  }
+
+  let queue1 = new Queue();
+</script>
+
+### peek (시간복잡도 : O(1))
+
+<script>
+  Queue.prototype.peek = function () {
+    return this.array[0];
+  };
+</script>
+
+### enqueue
+
+<script>
+  Queue.prototype.enqueue = function (value) {
+    return this.array.push(value);
+  };
+</script>
+
+### dequeue (시간복잡도 : O(n)) 연결리스트를 사용하지 않아서 재배열이
+이루어진다.
+
+<script>
+  Queue.prototype.dequeue = function () {
+    return this.array.shift();
+  };
+</script>
+
+### 접근 (시간복잡도 : O(n))
+
+<script>
+  function queueAccessNthTopNode(queue, n) {
+    let bufferArray = queue.getBuffer();
+    if (n <= 0) throw 'error';
+
+    let bufferQueue = new Queue(bufferArray);
+    while (--n !== 0) {
+      bufferQueue.dequeue();
+    }
+    return bufferQueue.dequeue();
+  }
+</script>
+
+### 검색 (시간복잡도 : O(n))
+
+<script>
+  function queueSearch(queue, element) {
+    let bufferArray = queue.getBuffer();
+
+    var bufferQueue = new Queue(bufferArray);
+    while(!bufferQueue){
+      if(bufferQueue.dequeue() === element){
+        retrun true
+      }
+    }
+    return false
+  }
+</script>
