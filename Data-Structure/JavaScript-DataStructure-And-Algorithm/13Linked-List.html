@@ -1,0 +1,92 @@
+Linked List : 각 노드가 다른 노드를 가르키는 자료구조이며 런타임에서 메모리 할당
+및 해제가 가능하다. 여기서 연결리스트는 두가지가 존재하는데 단일 연결리스트와
+다중 연결리스트가 있다.
+<br />
+## 기본 코드 : 링크드 리스트의 기본 개념은 하나의 노드가 다음 노드를 가리키는
+형태이다.
+
+<script>
+  function Node(data) {
+    this.data = data;
+    this.next = null;
+  }
+
+  function LinkedList() {
+    this.head = null;
+    this.size = 0;
+  }
+
+  LinkedList.prototype.isEmpty = function () {
+    return this.size === 0;
+  };
+</script>
+
+## 삽입 : head가 비어있으면 신규 노드가 head로, 만약 있다면 temp에 넣고 새로운
+헤드의 next를 temp로 넣어준다 (시간복잡도 O(1))
+
+<script>
+  LinkedList.prototype.insert = function (value) {
+    if (this.head === null) {
+      this.head = new Node(value);
+    } else {
+      let temp = this.head;
+      this.head = new Node(value);
+      this.head.next = temp;
+    }
+    this.size += 1;
+  };
+</script>
+
+## 제거 : 삭제하고자 하는 노드의 포인터를 null로 만들고 이전 노드의 포인터를
+삭제하는 다음 항목으로 옮긴다
+
+<script>
+  LinkedList.prototype.remove = function (value) {
+    let cur = this.head;
+    if (cur.data == value) {
+      this.head = cur.next;
+      this.size -= 1;
+    } else {
+      let prev = cur;
+      while (cur.next) {
+        if (cur.data == value) {
+          prev.next = cur.next;
+          return cur;
+        }
+        prev = cur;
+        cur = cur.next;
+      }
+      if (cur.data == value) {
+        prev.next = null;
+        return cur;
+      } else {
+        console.error(`${value} is not exist`);
+      }
+      this.size -= 1;
+    }
+  };
+</script>
+
+## 검색 : 순회를 하면서 인자값이 해당 노드의 데이터와 일치한지 확인한다.
+
+<script>
+  LinkedList.prototype.search = function (value) {
+    let cur = this.head;
+    while (!cur.next) {
+      if (cur.data == value) {
+        return true;
+      } else {
+        cur = cur.next;
+      }
+    }
+    if (cur.data == value) {
+      return true;
+    } else {
+      console.error(`${value} is not exist`);
+    }
+  };
+  let list = new LinkedList();
+  list.insert(1);
+  list.insert(2);
+  list.insert(3);
+</script>
