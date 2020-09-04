@@ -1,0 +1,115 @@
+Doubly LinkedList : 양방향 연결 리스트는 기존 연결 리스트와 달리 prev라는
+포인터가 존재한다.
+<script>
+  function Node(data) {
+    this.data = data;
+    this.next = null;
+    this.prev = null;
+  }
+
+  function DoubleLinkedList() {
+    this.head = null;
+    this.tail = null;
+    this.size = 0;
+  }
+
+  DoubleLinkedList.prototype.isEmpty = function () {
+    return this.size === 0;
+  };
+</script>
+
+## 삽입 (시간복잡도 O(1))
+
+<script>
+  DoubleLinkedList.prototype.addAtHead = function (value) {
+    if (this.head === null) {
+      this.head = new Node(value);
+      this.tail = this.head;
+    } else {
+      let temp = new Node(value);
+      temp.next = this.head;
+      this.head.prev = temp;
+      this.head = temp;
+    }
+    this.size += 1;
+  };
+</script>
+
+## 테일에 삽입
+
+<script>
+  DoubleLinkedList.prototype.addAtTail = function (value) {
+    if (this.tail === null) {
+      this.tail = new Node(value);
+      this.head = this.tail;
+    } else {
+      let temp = new Node(value);
+      temp.prev = this.tail;
+      this.tail.next = temp;
+      this.tail = temp;
+    }
+    size += 1;
+  };
+</script>
+
+## 헤드의 항목 삭제
+
+<script>
+  DoubleLinkedList.prototype.deleteAtHead = function () {
+    if (this.size === 0) {
+      console.error("empty list can't delete item");
+      return;
+    }
+    if (this.head === this.tail) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      this.head = this.head.next;
+      this.head.prev = null;
+    }
+    this.size -= 1;
+  };
+</script>
+
+## 테일의 항목 삭제
+
+<script>
+  DoubleLinkedList.prototype.deleteAtTail = function () {
+    if (this.size === 0) {
+      console.error("empty list can't delete item");
+      return;
+    }
+    if (this.tail === this.head) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      this.tail = this.tail.prev;
+      this.tail.next = null;
+    }
+    this.size -= 1;
+  };
+</script>
+
+## 검색
+
+<script>
+  DoubleLinkedList.prototype.search = function (value) {
+    if (this.size === 0) {
+      console.error('List is empty');
+      return;
+    } else {
+      let cur = this.head;
+      while (cur.next) {
+        if (cur.data == value) {
+          return true;
+        }
+        cur = cur.next;
+      }
+
+      if (cur.data == value) {
+        return true;
+      }
+      return false;
+    }
+  };
+</script>
